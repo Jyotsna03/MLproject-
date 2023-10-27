@@ -1,6 +1,9 @@
+from math import e
 import sys
 sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src')
 import logger
+import logging
+
 
 
 def error_message_detail(error,error_detail:sys):
@@ -18,3 +21,16 @@ class CustomException(Exception):
         self.error_message = error_message_detail(error_message, error_detail=error_detail)
     def __str__(self):
         return self.error_message   
+    
+if __name__ == "__main":
+    try:
+        # Your code that may raise an exception
+        a = 10 / 0
+    except Exception as e:
+        # Log an error message
+        logging.error("An exception occurred: %s", str(e))
+        # Raise a custom exception
+        raise CustomException("Custom exception message", e, type(e))
+
+ 
+ 
