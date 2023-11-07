@@ -1,9 +1,13 @@
 import os
 import sys
-sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src')
+from src import *
 from src.pipeline.exception import CustomException
 
-#from src.exception import CustomException
+#from src.components.data_transformation import DataTransformation
+#from src.components.data_transformation import DataTransformationConfig
+import sys
+from pathlib import Path
+sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src')
 import logging
 import pandas as pd
 
@@ -54,5 +58,8 @@ class DataIngestion:
 if __name__=="main":
     obj = DataIngestion()
     obj.initiate_data_ingestion()
+
+    #data_transformation=DataTransformation()
+    #data_transformation.initiate_data_transformation(train_data,test_data)
         
               

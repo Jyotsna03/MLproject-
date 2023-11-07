@@ -1,6 +1,7 @@
 from math import e
 import sys
-sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src')
+#sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src')
+sys.path.append('C:\\Users\\jyojy\\OneDrive\\Desktop\\MLproject\\src\\pipeline\\logger.py')
 import logger
 import logging
 
