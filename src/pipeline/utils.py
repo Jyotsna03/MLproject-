@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import dill
 
-from src.pipeline.exception import CustomException
+from src.pipeline.CustomException import CustomException
 
 def save_object(file_path,obj):
     try:

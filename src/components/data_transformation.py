@@ -1,20 +1,46 @@
 from dataclasses import dataclass
-import sys
-import os
+
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer 
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
+import os
+import sys
 
+# Get the current script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Append the project's base directory to the Python path
+project_base_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
+sys.path.append(project_base_dir)
+
+from src import *
 from src.pipeline.utils import save_object
 
-from src.pipeline.exception import CustomExceprion 
+from src.pipeline.exception import CustomException
 import logging 
 
+from datetime import datetime
+
+LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+logs_path =os.path.join(os.getcwd(),"logs",LOG_FILE)
+os.makedirs(logs_path,exist_ok=True)
+
+LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
+
+logging.basicConfig(
+    filename = LOG_FILE_PATH,
+    format="[%(asctime)s] %(lineno)d %(name)s - %(levelname)s -%(message)s",
+    level= logging.INFO,
+
+)
+if __name__== "__main__":
+    logging.info("Logging has started")
+
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join('artifacts',"preprocessor.pkl")
+    preprocessor_obj_file_path = os.path.join("artifacts","preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
@@ -66,7 +92,7 @@ class DataTransformation:
 
             
         except Exception as e:
-            raise CustomExceprion((sys,e))
+            raise CustomException((sys,e))
             
 
     def initiate_data_transformation(self,train_path,test_path):
@@ -117,4 +143,4 @@ class DataTransformation:
 
 
         except Exception as e:
-            raise CustomExceprion(e,sys)
+            raise CustomException(e,sys)
