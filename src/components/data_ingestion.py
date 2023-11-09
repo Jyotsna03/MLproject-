@@ -7,10 +7,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Append the project's base directory to the Python path
 project_base_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
 sys.path.append(project_base_dir)
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '4'
-os.environ['NUMEXPR_NUM_THREADS'] = '2'
-import numexpr as ne 
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig 
 
 from src import *
 from src.pipeline.exception import CustomException
@@ -70,8 +68,7 @@ class DataIngestion:
          raise CustomException("Custom exception message", e, type(e))
 
 
-    #data_transformation=DataTransformation()
-    #data_transformation.initiate_data_transformation(train_data,test_data)
+  
 
 
 from datetime import datetime
@@ -91,4 +88,9 @@ logging.basicConfig(
 if __name__== "__main__":
     obj = DataIngestion()
     obj.initiate_data_ingestion
-    logging.info("Logging has started")                     
+    logging.info("Logging has started") 
+    data_transformation=DataTransformation()
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)   
+
+    modeltrainer =ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))               
